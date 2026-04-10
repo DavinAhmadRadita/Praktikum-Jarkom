@@ -60,3 +60,4 @@ Contoh file
 <img width="552" height="130" alt="image" src="https://github.com/user-attachments/assets/dc5faa8c-b005-43d5-a8c3-b42d40f40c62" />
 
 ## 4.3 Tracking DNS dengan WireShark
+Tracking DNS dengan Wireshark adalah proses memantau dan menganalisis lalu lintas DNS di jaringan untuk melihat bagaimana sebuah domain diterjemahkan menjadi alamat IP. Secara sederhana, saat menggunakan Wireshark, kita bisa menangkap paket data DNS yang dikirim dari komputer ke server DNS, lalu melihat isi permintaan (query) dan jawaban (response) yang berisi alamat IP dari domain tersebut, sehingga berguna untuk troubleshooting jaringan atau analisis keamanan.
