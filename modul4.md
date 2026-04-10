@@ -43,3 +43,20 @@ Ketika dilakukan perintah nslookup untuk mencari server email (MX) dari yahoo.co
 IP Config adalah sebuah perintah yang digunakan untuk menampilkan informasi konfigurasi jaringan pada komputer, seperti alamat IP, subnet mask, dan default gateway.
 
 ## Langkah - Langkah
+1. Buka cmd lalu ketik "ipconfig /all" lalu enter, command tersebut untuk menampilkan IP dan DNS pada laptop
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/a576f5b8-e32c-40c4-8519-d21a7dbf9b97" />
+
+2. Ketik "ipconfig /all > networkinfo.txt" pada cmd lalu enter, command tersebut untuk menyimpan IP dan DNS yang sudah di tampilkan namun di simpan berupa file txt.
+<img width="588" height="72" alt="image" src="https://github.com/user-attachments/assets/86c288da-e800-44f7-857f-8b9a67e63dd0" />
+
+Contoh file 
+
+<img width="757" height="33" alt="image" src="https://github.com/user-attachments/assets/ed4f6855-8632-4468-996a-dbabf941d881" />
+
+3. Ketik "ipconfig /displaydns" pada cmd lalu enter, command tersebut untuk menampilkan DNS
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/480b0764-4e69-4d18-ab07-97c8da0934af" />
+
+4. Ketik "ipconfig /flushdns" pada cmd lalu enter, command tersebut untuk menghapus DNS yang di telah buka pada device
+<img width="552" height="130" alt="image" src="https://github.com/user-attachments/assets/dc5faa8c-b005-43d5-a8c3-b42d40f40c62" />
+
+## 4.3 Tracking DNS dengan WireShark
