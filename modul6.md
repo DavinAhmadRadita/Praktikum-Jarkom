@@ -25,4 +25,26 @@ Paket SYN berfungsi untuk memulai koneksi TCP antara client dan server melalui p
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/5688f682-6030-4dbd-9546-3596bb4cb04a" />
 Setelah proses upload selesai, server akan memberikan respon HTTP/1.1 200 OK. Respon ini menunjukkan bahwa file telah berhasil diterima dan diproses oleh server.
 
+## 6.3 Tampilan Awal pada Captured Trace
+
 ## Pertanyaan
+1. Berapa alamat IP dan nomor port TCP yang digunakan oleh komputer klien (sumber) untuk mentransfer file ke gaia.cs.umass.edu? Cara paling mudah menjawab pertanyaan ini adalah dengan memilih sebuah pesan HTTP dan meneliti detail paket TCP yang digunakan untuk membawa pesan HTTP tersebut.
+2. Apa alamat IP dari gaia.cs.umass.edu? Pada nomor port berapa ia mengirim dan menerima segmen TCP untuk koneksi ini?
+3. Berapa alamat IP dan nomor port TCP yang digunakan oleh komputer klien Anda (sumber) untuk mentransfer ke gaia.cs.umass.edu?
+
+## Jawaban
+
+1. Alamat IP komputer klien yang digunakan untuk mentransfer file ke gaia.cs.umass.edu adalah 10.225.197.205 dengan nomor port TCP 56333.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9844423e-09f6-4349-9a9b-83026f1db04a" />
+
+2. Alamat IP dari gaia.cs.umass.edu adalah 128.119.245.12 dan server tersebut menggunakan port TCP 80 untuk mengirim dan menerima segmen TCP pada koneksi ini.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/ae2ad143-7b28-40f5-8408-22d74462ef6f" />
+
+3. Alamat IP komputer klien saya adalah 10.225.197.205 dan menggunakan nomor port TCP 56333 untuk mentransfer data ke gaia.cs.umass.edu.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/5dc361e1-012f-4c9b-9447-413927b912ec" />
+
+## 6.4 Dasar TCP
+
+## Pertanyaan
+
+# Jawaban
