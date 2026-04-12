@@ -47,4 +47,23 @@ Setelah proses upload selesai, server akan memberikan respon HTTP/1.1 200 OK. Re
 
 ## Pertanyaan
 
+1. Berapa nomor urut segmen TCP SYN yang digunakan untuk memulai sambungan TCP antara komputer klien dan gaia.cs.umass.edu? Apa yang dimiliki segmen tersebut sehingga teridentifikasi sebagai segmen SYN? 
+2. Berapa nomor urut segmen SYNACK yang dikirim oleh gaia.cs.umass.edu ke komputer klien sebagai balasan dari SYN? Berapa nilai dari field Acknowledgement pada segmen SYNACK? Bagaimana gaia.cs.umass.edu menentukan nilai tersebut? Apa yang dimiliki oleh segmen sehingga teridentifikasi sebagai segmen SYNACK? 
+3. Berapa nomor urut segmen TCP yang berisi perintah HTTP POST? Perhatikan bahwa untuk menemukan perintah POST, Anda harus menelusuri content field milik paket di bagian bawah jendela Wireshark, kemudian cari segmen yang berisi "POST" di bagian field DATAnya. 
+4. Anggap segmen TCP yang berisi HTTP POST sebagai segmen pertama dalam koneksi TCP. Berapa nomor urut dari enam segmen pertama dalam TCP (termasuk segmen yang berisi HTTP POST)? Pada jam berapa setiap segmen dikirim? Kapan ACK untuk setiap segmen diterima? Dengan adanya perbedaan antara kapan setiap segmen TCP dikirim dan kapan acknowledgement-nya diterima, berapakah nilai RTT untuk keenam segmen tersebut? Berapa nilai EstimatedRTT setelah penerimaan setiap ACK? (Catatan: Wireshark memiliki fitur yang memungkinkan Anda untuk memplot RTT untuk setiap segmen TCP yang dikirim. Pilih segmen TCP yang dikirim dari klien ke server gaia.cs.umass.edu pada jendela "daftaraket yang ditangkap". Kemudian pilih: Statistics->TCP Stream Graph- >Round Trip Time Graph). 
+5. Berapa panjang setiap enam segmen TCP pertama? 
+6. Berapa jumlah minimum ruang buffer tersedia yang disarankan kepada penerima dan diterima untuk seluruh trace? Apakah kurangnya ruang buffer penerima pernah menghambat pengiriman? 
+7. Apakah ada segmen yang ditransmisikan ulang dalam file trace? Apa yang anda periksa (di dalam file trace) untuk menjawab pertanyaan ini? 
+8. Berapa banyak data yang biasanya diakui oleh penerima dalam ACK? Dapatkah anda mengidentifikasi kasus-kasus di mana penerima melakukan ACK untuk setiap segmen yang diterima? 
+9. Berapa throughput (byte yang ditransfer per satuan waktu) untuk sambungan TCP? Jelaskan bagaimana Anda menghitung nilai ini.
+
 # Jawaban
+
+1. Nomor urut (Sequence Number) pada segmen SYN adalah Seq = 0. Segmen ini dikenali sebagai SYN karena pada kolom info terdapat [SYN], yang berarti flag SYN aktif (1) dan digunakan untuk memulai koneksi TCP.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/96ed1df8-b068-48c1-b496-d9a2cff88926" />
+
+2. Nomor urut (Sequence Number) pada segmen SYN-ACK adalah Seq = 0, sedangkan nilai Acknowledgement Number = 1. Nilai Acknowledgement tersebut diperoleh dari nomor urut segmen SYN milik klien (Seq = 0) yang kemudian ditambah 1, karena dalam TCP, segmen SYN dianggap mengonsumsi satu nomor urut. Segmen ini dapat diidentifikasi sebagai segmen SYN-ACK karena pada bagian Flags terlihat [SYN, ACK], yang berarti kedua flag tersebut aktif (set).
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3304d98f-3264-4c73-88da-978bce24213f" />
+
+3. Nomor urut (Sequence Number) segmen TCP yang berisi perintah HTTP POST adalah Seq = 1. Segmen ini ditemukan pada frame nomor 4, yang dapat diidentifikasi dengan melihat isi payload pada bagian data yang mengandung teks "POST /ethereal-labs/lab3-1-reply.htm HTTP/1.1". Selain itu, segmen ini juga memiliki flag [PSH, ACK] dengan panjang data Len = 565 byte, yang menunjukkan bahwa segmen tersebut membawa data aplikasi (HTTP POST).
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9e4e8664-6896-4751-9002-29c06b03f519" />
