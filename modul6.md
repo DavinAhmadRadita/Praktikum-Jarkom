@@ -68,4 +68,42 @@ Setelah proses upload selesai, server akan memberikan respon HTTP/1.1 200 OK. Re
 3. Nomor urut (Sequence Number) segmen TCP yang berisi perintah HTTP POST adalah Seq = 1. Segmen ini ditemukan pada frame nomor 4, yang dapat diidentifikasi dengan melihat isi payload pada bagian data yang mengandung teks "POST /ethereal-labs/lab3-1-reply.htm HTTP/1.1". Selain itu, segmen ini juga memiliki flag [PSH, ACK] dengan panjang data Len = 565 byte, yang menunjukkan bahwa segmen tersebut membawa data aplikasi (HTTP POST).
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9e4e8664-6896-4751-9002-29c06b03f519" />
 
-4. 
+4. Berdasarkan grafik Round Trip Time pada Wireshark, enam segmen TCP pertama memiliki nilai RTT yang bervariasi, yaitu sekitar 30 ms hingga 180 ms. Nilai RTT diperoleh dari enam titik pertama pada grafik. Waktu pengiriman segmen dilihat pada sumbu waktu, sedangkan waktu penerimaan ACK didapat dari penjumlahan waktu kirim dengan RTT masing-masing segmen. Perbedaan nilai RTT menunjukkan adanya variasi delay pada jaringan. Estimated RTT dihitung menggunakan metode EWMA dengan α = 0,125, di mana nilai awal diambil dari RTT pertama dan diperbarui untuk setiap segmen berikutnya. Hasilnya, Estimated RTT lebih stabil dibandingkan RTT aktual.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/98c6f57c-c148-4f1a-9d60-61a272ecf9e3" />
+
+5. total panjang dari 6 segmen pertama adalah 7865 byte
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/ea304c4e-5270-4fb3-9363-9606bd7c1571" />
+
+6. nilai ruang buffer yang tersedia pada sisi penerima adalah sebesar 17520 byte. Nilai ini menunjukkan bahwa penerima memiliki kapasitas buffer yang cukup untuk menerima data dari pengirim. Selama proses komunikasi, tidak terlihat adanya indikasi bahwa buffer penerima menjadi penuh (tidak terdapat nilai window size = 0), sehingga dapat disimpulkan bahwa kekurangan ruang buffer tidak pernah menghambat proses pengiriman data.
+<img width="563" height="147" alt="image" src="https://github.com/user-attachments/assets/874c7dc3-25ce-48c0-bcde-bb3eb21509ad" />
+
+7. tidak ditemukan adanya segmen TCP yang ditransmisikan ulang. Hal ini menunjukkan bahwa selama proses komunikasi tidak terjadi kehilangan paket, sehingga pengiriman data berlangsung dengan lancar tanpa perlu pengiriman ulang.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/5d2be88e-f251-40b4-9b6c-47193af52d30" />
+
+8. Jumlah data yang diakui oleh ACK tidak selalu sama dan dapat bervariasi. Penerima dapat mengakui beberapa segmen sekaligus dalam satu ACK, sehingga tidak selalu dilakukan untuk setiap segmen secara individual.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/85a3a43b-f282-4682-9e67-3fb7cb9c57aa" />
+
+9. Throughput sambungan TCP pada grafik tersebut berada pada kisaran sekitar 200–250 kbps atau setara dengan ±25–31 KB per detik. Nilai ini diperoleh dengan melihat garis average throughput (warna cokelat) pada sumbu kanan yang menunjukkan nilai stabil di rentang tersebut, kemudian mengonversinya dari kilobit per detik ke byte per detik dengan membagi 8.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6074a54c-a0aa-4958-a9a2-1fc5473ddba4" />
+
+## 6.5 Congestion Control pada TCP
+mekanisme untuk mencegah pengirim data membebani jaringan (network overload), yang bertujuan menghindari congestion collapse dan menjamin keadilan (fairness) penggunaan bandwidth. TCP menggunakan algoritma dinamis, terutama Congestion Window (CWND), untuk menyesuaikan laju pengiriman berdasarkan tingkat kemacetan yang dideteksi melalui packet loss atau timeout. 
+
+## Langkah - Langkah dan Pertanyaan
+
+1. Mengidentifikasi slow start dan congestion avoidance 
+- Buka file tcp-ethereal-trace-1 menggunakan wireshark
+- setelah terbuka ketik "tcp" pada search bar
+- click menu stattistic -> tcp stream graph -> Time-Sequence Graph (Stevens) maka akan muncul seperti gambar
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0142d991-4771-42d1-8495-973e86185866" />
+
+- fase slow start dimulai sejak awal transmisi (sekitar t = 0 detik) dan berlangsung hingga kira-kira 0,5 detik, yang ditandai dengan peningkatan sequence number yang semakin cepat. Setelah itu, TCP memasuki fase congestion avoidance, yang terlihat dari pola kenaikan sequence number yang lebih stabil dan cenderung linear hingga akhir pengamatan. Dibandingkan dengan perilaku TCP ideal, hasil pengukuran menunjukkan bahwa fase slow start tidak sepenuhnya eksponensial dan grafik berbentuk bertingkat (staircase), yang disebabkan oleh kondisi jaringan nyata seperti delay, mekanisme ACK, dan variasi RTT.
+
+2. Mengidentifikasi slow start & songestion svoidance (alice.txt)
+- buka wireshark lalu pilih wifi
+- buka link "http://gaia.cs.umass.edu/wireshark-labs/TCP-wireshark-file1.html" pada browser anda, lalu upload file alice.txt
+- setelah itu kembali ke wireshark dan ketik "tcp" pada search bar
+- lalu click menu stattistic -> tcp stream graph -> Time-Sequence Graph (Stevens) maka akan muncul seperti gambar
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d2866094-62c0-462a-9748-23a49d16c6d7" />
+
+- fase slow start tidak terlihat jelas seperti pada kondisi ideal, karena sejak awal kenaikan sequence number sudah cenderung bertahap dan tidak menunjukkan pola eksponensial yang signifikan. Grafik lebih didominasi oleh pola kenaikan bertingkat (staircase) dengan jeda waktu yang cukup lama, sehingga dapat disimpulkan bahwa TCP hampir sepanjang waktu berada pada fase congestion avoidance atau dibatasi oleh faktor lain seperti aplikasi atau jaringan (misalnya delay Wi-Fi). Dibandingkan dengan perilaku TCP ideal, hasil ini menunjukkan perbedaan yang cukup besar karena tidak terlihat pertumbuhan cepat di awal dan terdapat interval waktu yang panjang antar pengiriman data, yang kemungkinan disebabkan oleh keterbatasan laju pengiriman aplikasi, latency tinggi, atau mekanisme kontrol aliran.
