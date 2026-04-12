@@ -107,3 +107,25 @@ Tracking DNS dengan Wireshark adalah proses memantau dan menganalisis lalu linta
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/490b18ba-aecb-493f-9dbe-037369caa3bc" />
 
 7. host saya tidak selalu perlu mengirimkan pesan permintaan DNS baru setiap kali mengakses gambar. Hal ini karena sistem operasi dan browser biasanya menyimpan hasil resolusi DNS (DNS cache), sehingga jika domain yang diakses sama, maka alamat IP yang sudah diketahui sebelumnya dapat langsung digunakan tanpa perlu melakukan permintaan DNS ulang.
+
+## Pertanyaan Lanjutan
+
+1. Apa port tujuan pada pesan permintaan DNS? Apa port sumber pada pesan balasan DNS?
+2. Ke alamat IP manakah pesan permintaan DNS dikirimkan? Apakah alamat IP tersebut merupakan default alamat IP server DNS lokal Anda?
+3. Periksa pesan permintaan DNS. Apa ”jenis” atau ”type” dari pesan tersebut? Apakah pesan tersebut mengandung ”jawaban” atau ”answers”?
+4. Periksa pesan balasan DNS. Berapa banyak ”jawaban” atau “answers” yang terdapat di dalamnya. Apa saja isi yang terkandung dalam setiap jawaban tersebut?
+
+## Jawaban
+
+1. Pada pesan permintaan DNS, port tujuan yang digunakan adalah 53, sedangkan pada pesan balasan DNS, port sumber yang digunakan juga 53.
+<img width="1681" height="174" alt="image" src="https://github.com/user-attachments/assets/1c929d36-a635-4294-b8cc-ee2d35bb75d0" />
+<img width="1654" height="216" alt="image" src="https://github.com/user-attachments/assets/846efbbf-7d75-4a5d-8782-a378917ea9fb" />
+
+2. Pesan permintaan DNS dikirim ke alamat IP 10.225.197.204, yang merupakan alamat IP dari DNS server lokal (default) pada jaringan yang digunakan.
+<img width="1660" height="198" alt="image" src="https://github.com/user-attachments/assets/f2d28c5d-3e8a-418e-b6b6-e5a12099c451" />
+
+3. Pada pesan permintaan DNS, tipe (type) yang digunakan adalah A (Address Record), yaitu untuk meminta alamat IP dari domain mit.edu. Selain itu, pesan permintaan tersebut tidak mengandung jawaban (answers), yang dapat dilihat dari nilai Answer RRs = 0, karena pesan tersebut hanya berupa permintaan dari client ke server DNS.
+<img width="1650" height="365" alt="image" src="https://github.com/user-attachments/assets/7f00d793-7672-4ee0-97e4-b17eeeae88af" />
+
+4. Pada pesan balasan DNS, terdapat 1 jawaban (answer), yang dapat dilihat dari nilai Answer RRs = 1. Jawaban tersebut berisi informasi berupa nama domain mit.edu, dengan tipe A (Address Record), kelas IN (Internet), serta alamat IP yang diberikan yaitu 23.15.150.186.
+<img width="1778" height="473" alt="image" src="https://github.com/user-attachments/assets/ce3c1740-7aaa-428b-bd2d-567fe6b8b1f7" />
