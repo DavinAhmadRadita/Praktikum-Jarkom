@@ -67,3 +67,5 @@ Setelah proses upload selesai, server akan memberikan respon HTTP/1.1 200 OK. Re
 
 3. Nomor urut (Sequence Number) segmen TCP yang berisi perintah HTTP POST adalah Seq = 1. Segmen ini ditemukan pada frame nomor 4, yang dapat diidentifikasi dengan melihat isi payload pada bagian data yang mengandung teks "POST /ethereal-labs/lab3-1-reply.htm HTTP/1.1". Selain itu, segmen ini juga memiliki flag [PSH, ACK] dengan panjang data Len = 565 byte, yang menunjukkan bahwa segmen tersebut membawa data aplikasi (HTTP POST).
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9e4e8664-6896-4751-9002-29c06b03f519" />
+
+4. 
