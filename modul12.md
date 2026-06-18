@@ -1,4 +1,4 @@
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/258d4daa-f9d0-4af6-a533-e88a2f961e6f" /># MODUL 12 ICMP
+# MODUL 12 ICMP
 
 **ICMP (Internet Control Message Protocol)** adalah protokol jaringan yang digunakan untuk mengirimkan pesan kontrol, informasi status, dan laporan kesalahan antar perangkat dalam jaringan IP. ICMP tidak digunakan untuk mengirim data pengguna, melainkan untuk membantu proses komunikasi dan diagnosis jaringan. Protokol ini sering digunakan pada perintah ping untuk menguji konektivitas antara dua perangkat dan traceroute untuk melacak jalur yang dilalui paket data menuju tujuan. Dengan ICMP, administrator jaringan dapat mendeteksi masalah koneksi, mengetahui apakah suatu perangkat dapat dijangkau, serta menganalisis kinerja jaringan.
 
